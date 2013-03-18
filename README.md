@@ -9,4 +9,4 @@ All types exposed by the HostedCheckoutAPI are returned by MercuryHCClient->getT
 
 The appropriate endpoint WSDL URL must be specified in the constructor of MercuryHCClient.
 
-MercuryHCClient uses [PHP's SoapClient](http://php.net/manual/en/class.soapclient.php) which requires the libxml PHP extension. This means that passing in --enable-libxml is also required, although this is implicitly accomplished because libxml is enabled by default.
+MercuryHCClient uses [PHP's SoapClient](http://php.net/manual/en/class.soapclient.php) which requires PHP 5+ and the libxml PHP extension. This means that passing in --enable-libxml is also required, although this is implicitly accomplished because libxml is enabled by default.
