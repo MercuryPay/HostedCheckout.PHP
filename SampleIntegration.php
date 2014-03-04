@@ -3,7 +3,7 @@
 /**
  * Mercury Payment Systems Hosted Checkout PHP Client
  *
- * ©2013 Mercury Payment Systems, LLC - all rights reserved.
+ * ï¿½2013 Mercury Payment Systems, LLC - all rights reserved.
  *
  * Disclaimer:
  * This software and all specifications and documentation contained
@@ -33,6 +33,7 @@
 	{
 		$initPaymentRequest = array(
 				"MerchantID"	=>	"[Merchant ID]",
+				"LaneID"	=> 	"02",
 				"Password"	=>	"[Password]",
 				"Invoice"	=>	"54321",
 				"TotalAmount"	=>	9.9,
