@@ -3,7 +3,7 @@
 /**
  * Mercury Payment Systems Hosted Checkout PHP Client
  *
- * �2013 Mercury Payment Systems, LLC - all rights reserved.
+ * Copyright 2014 Mercury Payment Systems, LLC - all rights reserved.
  *
  * Disclaimer:
  * This software and all specifications and documentation contained
