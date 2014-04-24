@@ -147,7 +147,7 @@
 		$verifyCardInfoRequest = array(
 				"MerchantID"	=>	"[Merchant ID]",
 				"Password"	=>	"[Password]",
-				"PaymentID"	=>	$cID
+				"PaymentID"	=>	"CardID" =>$cID;
 		);
 	
 		$verifyCardInfoResponse = $hcws->sendVerifyCardInfo($verifyCardInfoRequest);
@@ -159,15 +159,13 @@
 		// Hide Password and CardID from public echo
 		$verifyCardInfoRequest["Password"] = "********";
 		$verifyCardInfoRequest["CardID"] = "********";
-		$verifyCardInfoRequest["PaymentID"] = "********";
-		
+
 		print_r($verifyCardInfoRequest);
 		echo "<br /><h3>Response:</h3>";
 	
 		// Hide CardID and PaymentID from public echo
 		$verifyCardInfoResponse->VerifyCardInfoResult->CardID = "********";
-		$verifyCardInfoResponse->VerifyCardInfoResult->PaymentID = "********";
-	
+
 		print_r($verifyCardInfoResponse);
 	
 		echo "</pre>";
