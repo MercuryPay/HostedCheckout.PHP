@@ -147,7 +147,7 @@
 		$verifyCardInfoRequest = array(
 				"MerchantID"	=>	"[Merchant ID]",
 				"Password"	=>	"[Password]",
-				"PaymentID"	=>	"CardID" =>$cID;
+				"PaymentID"	=>	$cID
 		);
 	
 		$verifyCardInfoResponse = $hcws->sendVerifyCardInfo($verifyCardInfoRequest);
