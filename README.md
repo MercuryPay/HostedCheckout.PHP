@@ -1,6 +1,7 @@
 Mercury Hosted Checkout Sample PHP Integration
 ==============================================
 
+* Code tested on MacBook PRO running Apache/2.2.26 and PHP/5.4.30
 * This sample code is not a full integration to Hosted Checkout.  It does provide sample calls to InitializePayment and VerifyPayment that will be a portion of the full integration.
 * Because no card data is actually entered the call to VerifyPayment will not return all of the information after real data is entered in the HostedCheckout card input form.
 * You will need to replace the [Merchant ID] and [Password] placeholders in SampleIntegration.php with real values found in the integration guide prior to making the call or you will receive 'Authenticate Failed'.
