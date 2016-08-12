@@ -3,7 +3,7 @@
 /**
  * Mercury Payment Systems HostedCheckout PHP Client
  *
- * ©2013 Mercury Payment Systems, LLC - all rights reserved.
+ * Â©2013 Mercury Payment Systems, LLC - all rights reserved.
  *
  * Disclaimer:
  * This software and all specifications and documentation contained
@@ -30,7 +30,7 @@
 		function __construct()
 		{
 			// Hosted Checkout API WSDL URL
-			$wsdlURL = "https://hc.mercurydev.net/hcws/HCService.asmx?WSDL";
+			$wsdlURL = "https://hc.mercurycert.net/hcws/HCService.asmx?WSDL";
 			$this->wsClient = new SoapClient($wsdlURL);
 		}
 				
