@@ -34,7 +34,7 @@
 		$initPaymentRequest = array(
 				"MerchantID"	=>	"[Merchant ID]",
 				"LaneID"	=> 	"02",
-				"Password"	=>	"[Password]",
+				"Password"	=>	'[Password]',
 				"Invoice"	=>	"54321",
 				"TotalAmount"	=>	9.9,
 				"TaxAmount"	=>	0.0,
