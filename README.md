@@ -12,18 +12,25 @@ SampleIntegration.php provides a few short examples of how to use a MercuryHCCli
 
 All types exposed by the HostedCheckoutAPI are returned by MercuryHCClient->getTypes();
 
-The appropriate endpoint WSDL URL must be specified in the constructor of MercuryHCClient.
+```php
+
+new MercuryHCClient('[Merchant ID]', '[Password] ');
+
+```
+
+> #####Note:
+* you do not need add the [Merchant ID] and [Password] in the requests, because it automatically added to the request through the class constructor.
 
 ## MercuryHCClient Class
 
 MercuryHCClient class (contained in MercuryHCClient.php) is used to send requests to Mercury's Hosted Checkout API.
 
 MercuryHCClient
- - [getTypes()](https://hc.mercurydev.net/hcws/HCService.asmx?WSDL)
- - [sendInitializeCardInfo($initializeCardInfo)](https://hc.mercurydev.net/hcws/HCService.asmx?op=InitializeCardInfo)
- - [sendInitializePayment($initializePayment)](https://hc.mercurydev.net/hcws/HCService.asmx?op=InitializePayment)
- - [sendVerifyCardInfo($verifyCardInfo)](https://hc.mercurydev.net/hcws/HCService.asmx?op=VerifyCardInfo)
- - [sendVerifyPayment($verifyPayment)](https://hc.mercurydev.net/hcws/HCService.asmx?op=VerifyPayment)
+ - [getTypes()](https://hc.mercurycert.net/hcws/HCService.asmx?WSDL)
+ - [sendInitializeCardInfo($initializeCardInfo)](https://hc.mercurycert.net/hcws/HCService.asmx?op=InitializeCardInfo)
+ - [sendInitializePayment($initializePayment)](https://hc.mercurycert.net/hcws/HCService.asmx?op=InitializePayment)
+ - [sendVerifyCardInfo($verifyCardInfo)](https://hc.mercurycert.net/hcws/HCService.asmx?op=VerifyCardInfo)
+ - [sendVerifyPayment($verifyPayment)](https://hc.mercurycert.net/hcws/HCService.asmx?op=VerifyPayment)
 
 Each method takes an associative array of request parameters, as demonstrated in SampleIntegration.php.
 
