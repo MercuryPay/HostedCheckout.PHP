@@ -22,47 +22,58 @@
  * disclaimer notice.
  */
 
-	class MercuryHCClient
-	{		
-		
-		private $wsClient;
-		
-		function __construct()
-		{
-			// Hosted Checkout API WSDL URL
-			$wsdlURL = "https://hc.mercurycert.net/hcws/HCService.asmx?WSDL";
-			$this->wsClient = new SoapClient($wsdlURL);
-		}
-				
-		public function getTypes()
-		{
-			return $this->wsClient->__getTypes();
-		}
-		
-		public function sendInitializeCardInfo($initializeCardInfo)
-		{
-			$initCardInfoRequest = array("request" => $initializeCardInfo);
-			return $this->wsClient->InitializeCardInfo($initCardInfoRequest);
-		}
-		
-		public function sendInitializePayment($initializePayment)
-		{
-			$initPaymentRequest = array("request" => $initializePayment);
-			return $this->wsClient->InitializePayment($initPaymentRequest);
-		}
-		
-		public function sendVerifyCardInfo($verifyCardInfo)
-		{
-			$verifyCardInfoRequest = array("request" => $verifyCardInfo);
-			return $this->wsClient->VerifyCardInfo($verifyCardInfoRequest);
-		}
-		
-		public function sendVerifyPayment($verifyPayment)
-		{
-			$verifyPaymentRequest = array("request" => $verifyPayment);
-			return $this->wsClient->VerifyPayment($verifyPaymentRequest);
-		}
-		
-	}
+class MercuryHCClient
+{
+    protected $wsClient;
 
-?>
+    protected $merchantId;
+
+    protected $password;
+
+
+    public function __construct($merchantId, $password)
+    {
+        $this->merchantId = $merchantId;
+        $this->password = $password;
+
+        // Hosted Checkout API WSDL URL
+        $wsdlURL = 'https://hc.mercurycert.net/hcws/HCService.asmx?WSDL';
+        $this->wsClient = new SoapClient($wsdlURL);
+    }
+
+
+    public function __call($name, $args)
+    {
+        $methodsAvaliable = [
+            'InitializeCardInfo',
+            'InitializePayment',
+            'VerifyCardInfo',
+            'VerifyPayment',
+        ];
+
+        $pre = substr($name, 0, 4);
+        $rest = substr($name, 4);
+        
+        if ($pre == 'send' && in_array($rest, $methodsAvaliable)) {
+            $requestData = array_merge(
+                [
+                    'MerchantID' => $this->merchantId,
+                    'Password' => $this->password,
+                ],
+                $args[0]
+            );
+
+            $resp = $this->wsClient->$rest(['request' => $requestData ]);
+            
+            return $resp->{$rest.'Result'};
+        }
+
+        throw new Exception('Error, the method ' . $rest . ' does not exist');
+    }
+
+
+    public function getTypes()
+    {
+        return $this->wsClient->__getTypes();
+    }
+}

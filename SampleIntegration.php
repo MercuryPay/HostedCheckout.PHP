@@ -22,165 +22,147 @@
  * disclaimer notice.
  */
 
-	// Get MercuryHCClient Object
-	include_once("MercuryHCClient.php");
-	$hc = new MercuryHCClient();
-	
-	/**
-	 InitializePayment Example
-	 */
-	function initPaymentExample($hcws)
-	{
-		$initPaymentRequest = array(
-				"MerchantID"	=>	"[Merchant ID]",
-				"LaneID"	=> 	"02",
-				"Password"	=>	'[Password]',
-				"Invoice"	=>	"54321",
-				"TotalAmount"	=>	9.9,
-				"TaxAmount"	=>	0.0,
-				"TranType"	=>	"PreAuth",
-				"Frequency"	=>	"OneTime",
-				"Memo"	=>	"InitializePaymentTest",
-				"ProcessCompleteUrl"	=>	"http://www.mercurypay.com",
-				"ReturnUrl"	=>	"http://www.mercurypay.com"
-				); 
-		
-		$initPaymentResponse = $hcws->sendInitializePayment($initPaymentRequest);
-		echo "<pre>";
-		echo "<h1>InitializePayment Example</h1>";
-		echo "Response Code: " . $initPaymentResponse->InitializePaymentResult->ResponseCode;
-		echo "<br />Message: " . $initPaymentResponse->InitializePaymentResult->Message;
-		echo "<br /><h3>Request:</h3>";
-		
-		// Hide Password from public echo
-		$initPaymentRequest["Password"] = "********";
-		
-		print_r($initPaymentRequest);
-		echo "<br /><h3>Response:</h3>";
-		
-		$ret = $initPaymentResponse->InitializePaymentResult->PaymentID;
-		
-		// Hide PaymentID from public echo
-		$initPaymentResponse->InitializePaymentResult->PaymentID = "********";
-		
-		print_r($initPaymentResponse);
-		echo "</pre>";
-		
-		return $ret;
-		
-	}
-	
-	/**
-	 VerifyPayment Example
-	 */
-	function verifyPaymentExample($hcws, $pmntID)
-	{
-		$verifyPaymentRequest = array(
-				"MerchantID"	=>	"[Merchant ID]",
-				"Password"	=>	"[Password]",
-				"PaymentID"	=>	$pmntID
-		);
-	
-		$verifyPaymentResponse = $hcws->sendVerifyPayment($verifyPaymentRequest);
-		echo "<pre>";
-		echo "<h1>VerifyPayment Example</h1>";
-		echo "Response Code: " . $verifyPaymentResponse->VerifyPaymentResult->ResponseCode;
-		echo "<br /><h3>Request:</h3>";
-		
-		// Hide Password and PaymentID from public echo
-		$verifyPaymentRequest["Password"] = "********";
-		$verifyPaymentRequest["PaymentID"] = "********";
-		
-		print_r($verifyPaymentRequest);
-		echo "<br /><h3>Response:</h3>";
-		
-		// Hide PaymentID from public echo
-		$verifyPaymentResponse->VerifyPaymentResult->PaymentID = "********";
-		
-		print_r($verifyPaymentResponse);
-		
-		echo "</pre>";
-	}
-	
-	/**
-	 InitializeCardInfo Example
-	 */
-	function initCardInfoExample($hcws)
-	{
-		$initCardInfoRequest = array(
-				"MerchantID"	=>	"[Merchant ID]",
-				"Password"	=>	"[Password]",
-				"Frequency"	=>	"OneTime",
-				"ProcessCompleteUrl" => "http://www.mercurypay.com",
-				"ReturnUrl" => "http://www.mercurypay.com",
-		);
-	
-		$initCardInfoResponse = $hcws->sendInitializeCardInfo($initCardInfoRequest);
-		echo "<pre>";
-		echo "<h1>InitializeCardInfo Example</h1>";
-		echo "Response Code: " . $initCardInfoResponse->InitializeCardInfoResult->ResponseCode;
-		echo "<br />Message: " . $initCardInfoResponse->InitializeCardInfoResult->Message;
-		echo "<br /><h3>Request:</h3>";
-		
-		// Hide Password from public echo
-		$initCardInfoRequest["Password"] = "********";
-		
-		print_r($initCardInfoRequest);
-		echo "<br /><h3>Response:</h3>";
-		
-		$ret = $initCardInfoResponse->InitializeCardInfoResult->CardID;
-		
-		// Hide PaymentID from public echo
-		$initCardInfoResponse->InitializeCardInfoResult->CardID = "********";
-		
-		print_r($initCardInfoResponse);
-		echo "</pre>";
-		
-		return $ret;
-	}
-	
-	/**
-	 VerifyCardInfo Example
-	 */
-	function verifyCardInfoExample($hcws, $cID)
-	{
-		$verifyCardInfoRequest = array(
-				"MerchantID"	=>	"[Merchant ID]",
-				"Password"	=>	"[Password]",
-				"PaymentID"	=>	$cID
-		);
-	
-		$verifyCardInfoResponse = $hcws->sendVerifyCardInfo($verifyCardInfoRequest);
-		echo "<pre>";
-		echo "<h1>VerifyCardInfo Example</h1>";
-		echo "Response Code: " . $verifyCardInfoResponse->VerifyCardInfoResult->ResponseCode;
-		echo "<br /><h3>Request:</h3>";
-	
-		// Hide Password and CardID from public echo
-		$verifyCardInfoRequest["Password"] = "********";
-		$verifyCardInfoRequest["CardID"] = "********";
+// Get MercuryHCClient Object
+include_once('MercuryHCClient.php');
+$hc = new MercuryHCClient('[Merchant ID]', '[Password] ');
 
-		print_r($verifyCardInfoRequest);
-		echo "<br /><h3>Response:</h3>";
-	
-		// Hide CardID and PaymentID from public echo
-		$verifyCardInfoResponse->VerifyCardInfoResult->CardID = "********";
+/**
+InitializePayment Example
+*/
+function initPaymentExample($hcws)
+{
+    $initPaymentRequest = [
+        'LaneID' => '02',
+        'Invoice' => '54321',
+        'TotalAmount'=> 9.9,
+        'TaxAmount' => 0.0,
+        'TranType' => 'PreAuth',
+        'Frequency' => 'OneTime',
+        'Memo' => 'InitializePaymentTest',
+        'ProcessCompleteUrl' => 'http://www.mercurypay.com',
+        'ReturnUrl' => 'http://www.mercurypay.com'
+    ];
 
-		print_r($verifyCardInfoResponse);
-	
-		echo "</pre>";
-	}
+    $initPaymentResponse = $hcws->sendInitializePayment($initPaymentRequest);
 
-	// Print out all 4 examples
-	$paymentID = initPaymentExample($hc);
-	verifyPaymentExample($hc, $paymentID);
-	$cardID = initCardInfoExample($hc);
-	verifyCardInfoExample($hc, $cardID);
-	
-	// Print out SOAP type information
-	echo "<pre>";
-	echo "<h1>Hosted Checkout SOAP Types</h1>";
-	print_r($hc->getTypes());
-	echo "</pre>";
-	
-?>
+    echo '<pre>';
+    echo '<h1>InitializePayment Example</h1>';
+    echo 'Response Code: ' . $initPaymentResponse->ResponseCode;
+    echo '<br />Message: ' . $initPaymentResponse->Message;
+    echo '<br /><h3>Request:</h3>';
+
+    print_r($initPaymentRequest);
+    echo '<br /><h3>Response:</h3>';
+
+    $ret = $initPaymentResponse->PaymentID;
+
+    // Hide PaymentID from public echo
+    $initPaymentResponse->PaymentID = '********';
+
+    print_r($initPaymentResponse);
+    echo '</pre>';
+    return $ret;
+}
+
+/**
+VerifyPayment Example
+*/
+function verifyPaymentExample($hcws, $pmntID)
+{
+    $verifyPaymentRequest = [
+        'PaymentID' =>  $pmntID
+    ];
+
+    $verifyPaymentResponse = $hcws->sendVerifyPayment($verifyPaymentRequest);
+
+    echo '<pre>';
+    echo '<h1>VerifyPayment Example</h1>';
+    echo 'Response Code: ' . $verifyPaymentResponse->ResponseCode;
+    echo '<br /><h3>Request:</h3>';
+    
+    // Hide PaymentID from public echo
+    $verifyPaymentRequest['PaymentID'] = '********';
+    
+    print_r($verifyPaymentRequest);
+    echo '<br /><h3>Response:</h3>';
+    
+    // Hide PaymentID from public echo
+    $verifyPaymentResponse->PaymentID = '********';
+    
+    print_r($verifyPaymentResponse);
+    
+    echo '</pre>';
+}
+
+/**
+InitializeCardInfo Example
+*/
+function initCardInfoExample($hcws)
+{
+    $initCardInfoRequest = [
+        'Frequency' => 'OneTime',
+        'ProcessCompleteUrl' => 'http://www.mercurypay.com',
+        'ReturnUrl' => 'http://www.mercurypay.com',
+    ];
+
+    $initCardInfoResponse = $hcws->sendInitializeCardInfo($initCardInfoRequest);
+    
+    echo '<pre>';
+    echo '<h1>InitializeCardInfo Example</h1>';
+    echo 'Response Code: ' . $initCardInfoResponse->ResponseCode;
+    echo '<br />Message: ' . $initCardInfoResponse->Message;
+    echo '<br /><h3>Request:</h3>';
+    
+    print_r($initCardInfoRequest);
+    echo '<br /><h3>Response:</h3>';
+    
+    $ret = $initCardInfoResponse->CardID;
+    
+    // Hide PaymentID from public echo
+    $initCardInfoResponse->CardID = '********';
+    
+    print_r($initCardInfoResponse);
+    echo '</pre>';
+
+    return $ret;
+}
+
+/**
+VerifyCardInfo Example
+*/
+function verifyCardInfoExample($hcws, $cID)
+{
+    $verifyCardInfoRequest = [
+        'PaymentID' => $cID
+    ];
+
+    $verifyCardInfoResponse = $hcws->sendVerifyCardInfo($verifyCardInfoRequest);
+    
+    echo '<pre>';
+    echo '<h1>VerifyCardInfo Example</h1>';
+    echo 'Response Code: ' . $verifyCardInfoResponse->ResponseCode;
+    echo '<br /><h3>Request:</h3>';
+            
+    // Hide CardID from public echo
+    $verifyCardInfoRequest['CardID'] = '********';
+    print_r($verifyCardInfoRequest);
+    echo '<br /><h3>Response:</h3>';
+            
+    // Hide CardID and PaymentID from public echo
+    $verifyCardInfoResponse->CardID = '********';
+    print_r($verifyCardInfoResponse);
+            
+    echo '</pre>';
+}
+// Print out all 4 examples
+$paymentID = initPaymentExample($hc);
+
+verifyPaymentExample($hc, $paymentID);
+$cardID = initCardInfoExample($hc);
+verifyCardInfoExample($hc, $cardID);
+
+// Print out SOAP type information
+echo '<pre>';
+echo '<h1>Hosted Checkout SOAP Types</h1>';
+print_r($hc->getTypes());
+echo '</pre>';
