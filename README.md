@@ -1,6 +1,6 @@
 Mercury Hosted Checkout Sample PHP Integration
 ==============================================
-<a href="https://developer.vantiv.com/?utm_campaign=githubcta&utm_medium=hyperlink&utm_source=github&utm_content=codingforcommerce">Are you coding for commerce? Connect with our experts on Vantiv ONE.</a>
+<a href="https://developer.vantiv.com/?utm_campaign=githubcta&utm_medium=hyperlink&utm_source=github&utm_content=codingforcommerce">Are you coding for commerce? Connect with our experts on Worldpay ONE.</a>
 
 * Code tested on MacBook PRO running Apache/2.2.26 and PHP/5.4.30
 * This sample code is not a full integration to Hosted Checkout.  It does provide sample calls to InitializePayment and VerifyPayment that will be a portion of the full integration.
